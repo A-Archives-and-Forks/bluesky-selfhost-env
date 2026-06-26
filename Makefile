@@ -185,7 +185,7 @@ endif
 
 
 ${rDir}/jetstream:
-	git clone ${origin_repo_bsky_prefix}jetstream.git $@
+	git clone ${origin_repo_bsky_prefix}jetstream-legacy.git $@
 ifneq ($(fork_repo_prefix),)
 	-(cd $@; git remote add fork ${fork_repo_prefix}jetstream.git; git remote update fork)
 endif
