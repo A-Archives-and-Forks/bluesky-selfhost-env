@@ -39,6 +39,7 @@ FEEDGEN_PUBLISHER_PASSWORD=$(eval "${GEN_SHORT_PASS}")
 BSKY_SERVICE_SIGNING_KEY=$(eval "${GEN_LONG_PASS}")
 BSKY_ADMIN_PASSWORD=$(eval "${GEN_SHORT_PASS}")
 OPENSEARCH_INITIAL_ADMIN_PASSWORD=$(eval "${GEN_RANDOM_PASS}")
+BSYNC_API_KEY=$(eval "${GEN_SHORT_PASS}")
 PASS=$(eval "${GEN_LONG_PASS}")
 
 # the same as atproto/packages/dev-env/src/const.ts
@@ -48,6 +49,9 @@ ADMIN_PASSWORD=admin-pass
 #TRIAGE_PASSWORD=triage-pass
 PDS_JWT_SECRET=jwt-secret
 EXAMPLE_LABELER=did:example:labeler
+# the same as atproto/packages/dev-env/src/*.ts
+BSYNC_API_KEY=bsync-api-key
+BSYNC_API_KEYS=${BSYNC_API_KEY}
 
 # the same passwords for all admins, atproto/packages/dev-env/src/*.ts
 OZONE_ADMIN_PASSWORD=${ADMIN_PASSWORD}
@@ -83,5 +87,7 @@ echo "BSKY_ADMIN_PASSWORDS=${BSKY_ADMIN_PASSWORDS}"
 echo "BSKY_LABELS_FROM_ISSUER_DIDS=${BSKY_LABELS_FROM_ISSUER_DIDS}"
 echo "EXAMPLE_LABELER=${EXAMPLE_LABELER}"
 echo "OPENSEARCH_INITIAL_ADMIN_PASSWORD=${OPENSEARCH_INITIAL_ADMIN_PASSWORD}"
+echo "BSYNC_API_KEY=${BSYNC_API_KEY}"
+echo "BSYNC_API_KEYS=${BSYNC_API_KEYS}"
 
 echo "PASS=${PASS}"
