@@ -32,10 +32,11 @@ This repository aims to get self-hosted a bluesky environment easy, with:
  - Simplicity: all bluesky components run on one host, powered by docker-compose.
  - Minimal remapping: the simplest possible mapping rules between FQDN, reverse proxy, and docker-container, for easy understanding and tuning.
 
-Currently, my latest release is <strong>2026-06-20</strong>, based on the <strong>2026-06-20</strong> code from bluesky-social.<br>
+Currently, my latest release is <strong>2026-06-28</strong>, based on the <strong>2026-06-28</strong> code from bluesky-social.<br>
 
 ### Special notes about big impact changes in upstream regarding selfhost
 
+- changes in end of June 2026, MockBsync is droped from atproto, It requires real bsync instance even development scenario.
 - changes in begining of June 2026, palomar(and its dependencies regarding search feature) was deleted from indigo repository by https://github.com/bluesky-social/indigo/pull/1397
   It means, search engine was lost on selfhosting environment. so the code for palomar is salvaged and recovered into https://github.com/itaru2622/bluesky-palomar asof 2026-05-30.
   Current palomar and search feature is based on the above code.
@@ -93,8 +94,8 @@ You can change the domain name by setting the environment variable as follows:
 export DOMAIN=whatever.yourdomain.com
 
 # 2) Set 'asof' date (YYYY-MM-DD or 'latest') to select docker images and sources.
-#    Example: 2026-06-20 (latest prebuild) or 'latest' (following docker image naming).
-export asof=2026-06-20
+#    Example: 2026-06-28 (latest prebuild) or 'latest' (following docker image naming).
+export asof=2026-06-28
 
 # 3) Set email addresses:
 
