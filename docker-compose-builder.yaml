@@ -18,6 +18,8 @@ volumes:
     name: relay
   bsky:
     name: bsky
+  bsync:
+    name: bsync
   feed-generator:
     name: feed-generator
   pds:
@@ -367,9 +369,11 @@ services:
     environment:
       - BSKY_ADMIN_PASSWORDS=${BSKY_ADMIN_PASSWORDS}
       - BSKY_BLOB_CACHE_LOC=/cache/
+      - BSKY_BSYNC_API_KEY=${BSYNC_API_KEY}
       - BSKY_BSYNC_HTTP_VERSION=1.1
-      - BSKY_BSYNC_PORT=3002
-      - BSKY_BSYNC_URL=http://bsky:3002
+      # supporting self-signed certificates
+      - BSKY_BSYNC_IGNORE_BAD_TLS=true
+      - BSKY_BSYNC_URL=http://bsync:3002
       - BSKY_COURIER_URL=http://fake-courier.example.invalid/
       - BSKY_DATAPLANE_HTTP_VERSION=1.1
       - BSKY_DATAPLANE_PORT=3001
@@ -400,7 +404,50 @@ services:
       - ./certs/ca-certificates.crt:/etc/ssl/certs/ca-certificates.crt:ro
       # supporting self-signed certificates, easiest way <<<<
       - bsky:/cache/
-#     - ./repos/atproto/services/bsky/api.js:/app/services/bsky/api.js:ro
+#     - ./repos/atproto/services/bsky/api.ts:/app/services/bsky/api.ts:ro
+    restart: always
+    depends_on:
+      - database
+      - redis
+      - caddy
+
+  bsync:
+    # bsync
+    image: itaru2622/bluesky-atproto-bsync:${asof}
+    profiles: ['', 'atproto']
+    build:
+      context: ./repos/atproto/
+      dockerfile: services/bsync/Dockerfile
+      args:
+       - http_proxy=${http_proxy}
+       - https_proxy=${https_proxy}
+       - no_proxy=${no_proxy}
+       - JAVA_TOOL_OPTIONS=${JAVA_TOOL_OPTIONS}
+    ports:
+      - 3002:3002
+    expose:
+      - 3002
+    command: node --enable-source-maps --import=./tracer.ts index.ts
+    # to fix permision mismatch between volume owner(root) and process user(uid:1000, i.e: node), run as root. >>>>
+    user: root
+    # to fix permision mismatch between volume owner(root) and process user(uid:1000, i.e: node), run as root. <<<<
+    environment:
+      - BSYNC_API_KEYS=${BSYNC_API_KEYS}
+      - BSYNC_DB_MIGRATE=1
+      - BSYNC_DB_POOL_IDLE_TIMEOUT_MS=
+      - BSYNC_DB_POOL_MAX_USES=
+      - BSYNC_DB_POOL_SIZE=
+      - BSYNC_DB_POSTGRES_SCHEMA=bsync
+      - BSYNC_DB_POSTGRES_URL=postgres://${POSTGRES_USER}:${POSTGRES_PASSWORD}@database/bsync
+      - BSYNC_LONG_POLL_TIMEOUT_MS=10000
+      - BSYNC_PORT=3002
+      - BSYNC_VERSION=
+    volumes:
+      # supporting self-signed certificates, easiest way >>>>
+      - ./certs/ca-certificates.crt:/etc/ssl/certs/ca-certificates.crt:ro
+      # supporting self-signed certificates, easiest way <<<<
+      - bsync:/cache/
+#     - ./repos/atproto/services/bsync/index.ts:/app/services/bsync/index.ts:ro
     restart: always
     depends_on:
       - database
