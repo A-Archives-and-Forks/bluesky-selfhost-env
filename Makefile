@@ -111,7 +111,7 @@ LOG_LEVEL_DEFAULT ?=debug
 #    # no plc in Sdep, comparing below line.
 #
 Sdep  ?=caddy caddy-sidecar database redis opensearch plc test-wss test-ws test-indigo pgadmin
-Sbsky ?=pds relay bsky social-app palomar
+Sbsky ?=pds relay bsky bsync social-app palomar
 Sfeed ?=feed-generator
 #Sozone ?=ozone ozone-daemon
 Sozone ?=ozone-standalone
@@ -256,6 +256,8 @@ echo:
 	@echo "OZONE_ADMIN_EMAIL: ${OZONE_ADMIN_EMAIL}"
 	@echo "OZONE_ADMIN_HANDLE: ${OZONE_ADMIN_HANDLE}"
 	@echo "OZONE_ADMIN_PASSWORD: ${OZONE_ADMIN_PASSWORD}"
+	@echo "BSYNC_API_KEY: ${BSYNC_API_KEY}"
+	@echo "BSYNC_API_KEYS: ${BSYNC_API_KEYS}"
 	@echo ""
 	@echo "wDir:     ${wDir}"
 	@echo "passfile: ${passfile}"
