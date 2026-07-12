@@ -125,7 +125,7 @@ services:
       # debug for bluesky with indigo subcmds <<<
 
   database:
-    image: postgres:17-trixie
+    image: postgres:18-trixie
     ports:
       - 5432:5432
     environment:
@@ -137,7 +137,7 @@ services:
       - POSTGRES_DB=healthcheck
     volumes:
       - ./config/init-postgres:/docker-entrypoint-initdb.d/
-      - database:/var/lib/postgresql/data/
+      - database:/var/lib/postgresql
     restart: always
 
   pgadmin:
