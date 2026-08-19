@@ -78,6 +78,7 @@ services:
       interval: 5s
       retries: 20
       # to generate HTTPS certifications on-demand >>>>>
+    restart: always
 
   caddy-sidecar:
     image: httpd:2
@@ -86,6 +87,7 @@ services:
       - NODE_TLS_REJECT_UNAUTHORIZED=${NODE_TLS_REJECT_UNAUTHORIZED}
     volumes:
       - ./certs/ca-certificates.crt:/etc/ssl/certs/ca-certificates.crt:ro
+    restart: always
   # to generate HTTPS certifications on-demand <<<<<
   # debug for caddy>>> 
 
@@ -95,6 +97,7 @@ services:
       - app=main:app
       - opts=--host 0.0.0.0 --port 8080
     working_dir: /opt/fastapi-samples/3catchall
+    restart: always
 
   test-ws:
     image: itaru2622/fastapi:trixie
@@ -102,6 +105,7 @@ services:
       - app=main:app
       - opts=--host 0.0.0.0 --port 8080
     working_dir: /opt/fastapi-samples/3catchall
+    restart: always
 
   test-indigo:
     image: itaru2622/bluesky-indigo-tools:${asof}
@@ -123,6 +127,7 @@ services:
     volumes:
       - ./certs/ca-certificates.crt:/etc/ssl/certs/ca-certificates.crt:ro
       # debug for bluesky with indigo subcmds <<<
+    restart: always
 
   database:
     image: postgres:18-trixie
@@ -151,6 +156,7 @@ services:
       #      - ./certs/ca-certificates.crt:/etc/ssl/certs/ca-certificates.crt:ro
     depends_on:
       - database
+    restart: always
 
   redis:
     image: redis:8-trixie
