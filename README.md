@@ -36,6 +36,7 @@ Currently, my latest release is <strong>2026-08-15</strong>, based on the <stron
 
 ### Special notes about big impact changes in upstream regarding selfhost
 
+- changes in middle of Aug 2026, The hash of past commits in indigo repo changed (likely due to a rebase). As a result, some tags may not appear in the output of ```git log --decorate=full main```, such as asof-2026-06-13...asof-2026-08-15. but note that the commit log messages during those period were still kept with the same datetime in main branch. It means, the code is kept but the hashes are changed.
 - changes in end of June 2026, jetstream repo was renamed as jetstream-legacy, and jetstream repo created with new code base. This selfhosting tool is now using jetstream-legacy as jetstream.
 - changes in end of June 2026, MockBsync is droped from atproto, It requires real bsync instance even development scenario.
 - changes in begining of June 2026, palomar(and its dependencies regarding search feature) was deleted from indigo repository by https://github.com/bluesky-social/indigo/pull/1397
