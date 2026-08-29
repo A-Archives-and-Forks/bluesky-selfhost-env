@@ -1,6 +1,7 @@
 {
   "name": "bluesky-ops",
   "version": "1.0.0",
+  "type": "module",
   "description": "implementing ops aginst bluesky, including self-hosting blusky",
   "main": "index.js",
   "scripts": {
