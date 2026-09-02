@@ -1,8 +1,8 @@
 diff --git a/util/ssrf/ssrf.go b/util/ssrf/ssrf.go
-index 3ebf9698..6f51c48c 100644
+index 97218ac6..48322fdd 100644
 --- a/util/ssrf/ssrf.go
 +++ b/util/ssrf/ssrf.go
-@@ -21,6 +21,8 @@ import (
+@@ -22,6 +22,8 @@ import (
  	"net/http"
  	"syscall"
  	"time"
@@ -10,17 +10,17 @@ index 3ebf9698..6f51c48c 100644
 +	"strconv"
  )
  
- func ipv4Net(a, b, c, d byte, subnetPrefixLen int) net.IPNet {
-@@ -90,7 +92,7 @@ func PublicOnlyControl(network string, address string, conn syscall.RawConn) err
+ var ErrUnsafeNetworkAddress = errors.New("unsafe network address")
+@@ -107,7 +109,7 @@ func PublicOnlyControl(network string, address string, conn syscall.RawConn) err
  		return fmt.Errorf("%s is not a valid IP address", host)
  	}
  
 -	if !IsPublicIPAddress(ipaddress) {
 +	if (isPublicOnlyScenario() && !IsPublicIPAddress(ipaddress)) {
- 		return fmt.Errorf("%s is not a public IP address", ipaddress)
+ 		return fmt.Errorf("%w: %s is not a public IP address", ErrUnsafeNetworkAddress, ipaddress)
  	}
  
-@@ -101,6 +103,22 @@ func PublicOnlyControl(network string, address string, conn syscall.RawConn) err
+@@ -118,6 +120,22 @@ func PublicOnlyControl(network string, address string, conn syscall.RawConn) err
  	return nil
  }
  
