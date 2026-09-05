@@ -36,6 +36,8 @@ Currently, my latest release is <strong>2026-08-29</strong>, based on the <stron
 
 ### Special notes about big impact changes in upstream regarding selfhost
 
+- changes in middle of July 2026, social-app migrated all search to V2 and removed V1, then search posts became not available, as described in https://github.com/bluesky-social/atproto/ discussion 5480.
+  It fixed by asof-2026-09-05 version with the workaround described in the discussion. This means, selfhosting environment also migrated to Search V2 from V1(palomar) to follow changes in latest social-app.
 - changes in middle of Aug 2026, The hash of past commits in indigo repo changed (likely due to a rebase). As a result, some tags may not appear in the output of ```git log --decorate=full main```, such as asof-2026-06-13...asof-2026-08-15. but note that the commit log messages during those period were still kept with the same datetime in main branch. It means, the code is kept but the hashes are changed.
 - changes in end of June 2026, jetstream repo was renamed as jetstream-legacy, and jetstream repo created with new code base. This selfhosting tool is now using jetstream-legacy as jetstream.
 - changes in end of June 2026, MockBsync is droped from atproto, It requires real bsync instance even development scenario.
