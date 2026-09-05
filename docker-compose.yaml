@@ -49,6 +49,8 @@ services:
       - 443:443/udp
       - 9000:9000
     environment:
+      - SEARCH_V2_OVERRIDE_HEADER=x-bsky-search-v2-override
+      - BSKY_SEARCH_V2_OVERRIDE_HEADER=${BSKY_SEARCH_V2_OVERRIDE_HEADER}
       - GOINSECURE=${GOINSECURE}
       - NODE_TLS_REJECT_UNAUTHORIZED=${NODE_TLS_REJECT_UNAUTHORIZED}
       - DOMAIN=${DOMAIN}
@@ -339,6 +341,7 @@ services:
       - BSKY_REPO_PROVIDER=wss://${relayFQDN}
       - BSKY_SEARCH_URL=https://${palomarFQDN}
       - BSKY_SERVER_DID=did:web:${bskyFQDN}
+      - BSKY_SEARCH_V2_OVERRIDE_HEADER=${BSKY_SEARCH_V2_OVERRIDE_HEADER}
       - BSKY_SERVICE_SIGNING_KEY=${BSKY_SERVICE_SIGNING_KEY}
       - DEBUG_MODE=1
       - DID_PLC_URL=https://${plcFQDN}
