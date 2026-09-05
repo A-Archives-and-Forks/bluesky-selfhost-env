@@ -41,6 +41,7 @@ BSKY_ADMIN_PASSWORD=$(eval "${GEN_SHORT_PASS}")
 OPENSEARCH_INITIAL_ADMIN_PASSWORD=$(eval "${GEN_RANDOM_PASS}")
 BSYNC_API_KEY=$(eval "${GEN_SHORT_PASS}")
 PASS=$(eval "${GEN_LONG_PASS}")
+BSKY_SEARCH_V2_OVERRIDE_HEADER=$(eval "${GEN_SHORT_PASS}")
 
 # the same as atproto/packages/dev-env/src/const.ts
 # use short password
@@ -52,6 +53,8 @@ EXAMPLE_LABELER=did:example:labeler
 # the same as atproto/packages/dev-env/src/*.ts
 BSYNC_API_KEY=bsync-api-key
 BSYNC_API_KEYS=${BSYNC_API_KEY}
+# the same as searchV2OverrideHeader in atproto/packages/bsky/tests/views/post-search.test.ts
+BSKY_SEARCH_V2_OVERRIDE_HEADER=test
 
 # the same passwords for all admins, atproto/packages/dev-env/src/*.ts
 OZONE_ADMIN_PASSWORD=${ADMIN_PASSWORD}
@@ -89,5 +92,6 @@ echo "EXAMPLE_LABELER=${EXAMPLE_LABELER}"
 echo "OPENSEARCH_INITIAL_ADMIN_PASSWORD=${OPENSEARCH_INITIAL_ADMIN_PASSWORD}"
 echo "BSYNC_API_KEY=${BSYNC_API_KEY}"
 echo "BSYNC_API_KEYS=${BSYNC_API_KEYS}"
+echo "BSKY_SEARCH_V2_OVERRIDE_HEADER=${BSKY_SEARCH_V2_OVERRIDE_HEADER}"
 
 echo "PASS=${PASS}"
