@@ -134,7 +134,11 @@ api.{$DOMAIN}, {$bskyFQDN} {
 	tls {$EMAIL4CERTS} {
           on_demand
         }
-	reverse_proxy http://bsky:2584
+#  add header for SearchV2
+#	reverse_proxy http://bsky:2584
+	reverse_proxy http://bsky:2584 {
+		header_up {$SEARCH_V2_OVERRIDE_HEADER} {$BSKY_SEARCH_V2_OVERRIDE_HEADER}
+        }
 }
 
 {$socialappFQDN} {
